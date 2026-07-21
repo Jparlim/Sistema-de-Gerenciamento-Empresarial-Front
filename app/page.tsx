@@ -1,4 +1,4 @@
-import logo from "@/public/Logo.png";
+import logo from "@/public/Gemini_Generated_Image_anmqoianmqoianmq.png";
 import lock from "@/public/Lock.png";
 import { Metadata } from "next";
 
@@ -25,8 +25,9 @@ export default function CreateCount() {
   const teste2 = true;
 
   return (
-    <main>
-      <div className="flex flex-col gap-4">
+    <main className="w-full flex justify-center gap-8">
+      <img src={logo.src} width={800} />
+      <div className="flex flex-col mt-10 gap-4">
         <h1>Criar conta</h1>
         <p className="text-[20px]">
           Antes de continuar, confirme seu email para receber o token de
@@ -48,29 +49,35 @@ export default function CreateCount() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div>
+          <div className="">
             <h3>Nome da empresa</h3>
-            <input type="text" placeholder="" />
+            <input type="text" placeholder="" className="w-full py-2" />
           </div>
           <div>
             <h3>Email</h3>
-            <input type="text" placeholder="exemplo@gmail.com" />
+            <input type="text" className="w-full py-2" />
+          </div>
+          <div className="relative">
+            <h3>Senha</h3>
+            <input type="text" className="w-full py-2" />
+            <img
+              src={lock.src}
+              width={28}
+              height={28}
+              className="absolute top-11 left-2"
+            />
           </div>
           <div>
-            <h3>Nome da empresa</h3>
-            <input type="text">
-              <img src={lock.src} alt="" />
-            </input>
+            <h3>Telefone</h3>
+            <input type="text" className="w-full py-2" />
           </div>
-          <div>
-            <h3>Nome da empresa</h3>
-            <input type="text" />
+          <div className="flex justify-between">
+            <div className="w-[60%]">
+              <h3>CNPJ</h3>
+              <input type="text" className="w-full py-2" />
+            </div>
+            <button className="w-[30%]">Enviar token</button>
           </div>
-          <div>
-            <h3>Nome da empresa</h3>
-            <input type="text" />
-          </div>
-          <button>Enviar token</button>
         </div>
       </div>
     </main>

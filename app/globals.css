@@ -5,6 +5,8 @@
   font-family: var(--font-roboto);
 
   --blu: #0051ff;
+  --blu-hover: #004bed;
+  --blu-active: #0044d8;
   --gra: #0000000e;
 }
 
@@ -14,7 +16,7 @@
 }
 
 h1 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 48px;
 }
 
@@ -32,6 +34,28 @@ input ::placeholder {
   color: var(--gra);
 }
 
+button {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--blu);
+
+  border-radius: 10px;
+  color: white;
+}
+
+button:hover {
+  background: var(--blu-hover);
+  cursor: pointer;
+}
+
+button:active {
+  background: var(--blu-active);
+  cursor: pointer;
+}
+
 html,
 body {
   min-width: 100%;
@@ -41,7 +65,9 @@ body {
 body {
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   background: white;
+
   margin: 0;
+  padding: 0;
 }
