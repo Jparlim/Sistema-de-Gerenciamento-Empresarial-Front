@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  background-color: #f3f3fb;
   font-family: var(--font-roboto);
 
   --blu: #0051ff;
@@ -28,10 +27,8 @@ h3 {
 input {
   border: 2px solid var(--gra);
   border-radius: 10px;
-}
 
-input ::placeholder {
-  color: var(--gra);
+  outline: none;
 }
 
 button {
@@ -43,7 +40,6 @@ button {
   background-color: var(--blu);
 
   border-radius: 10px;
-  color: white;
 }
 
 button:hover {
