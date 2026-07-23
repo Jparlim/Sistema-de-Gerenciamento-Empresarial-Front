@@ -37,18 +37,22 @@ button {
   justify-content: center;
   align-items: center;
 
-  background-color: var(--blu);
+  color: white;
+  background: linear-gradient(90deg, #2d7cff 0%, #6a2cff 100%);
 
   border-radius: 10px;
 }
 
 button:hover {
-  background: var(--blu-hover);
+  transform: scale(1.1);
+  transition: transform 100ms ease;
+
   cursor: pointer;
 }
 
 button:active {
-  background: var(--blu-active);
+  transform: scale(1);
+  transition: transform 100ms ease;
   cursor: pointer;
 }
 

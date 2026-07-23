@@ -1,4 +1,4 @@
-import logo from "@/public/Gemini_Generated_Image_anmqoianmqoianmq.png";
+import logo from "@/public/logoCreatePage.png";
 import lock from "@/public/Lock.png";
 
 interface UserData {
@@ -10,14 +10,6 @@ interface UserData {
 }
 
 export default async function CreateCount() {
-  // await fetch("http://localhost:8888/user_pending", {
-  //   method: "POST",
-  //   headers: {
-  //     "content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(),
-  // });
-
   const teste = 50;
   const teste2 = true;
 
@@ -68,7 +60,9 @@ export default async function CreateCount() {
             )}
           </div>
           <div className={`w-full h-5 rounded-[20px] bg-gra`}>
-            <div className={`w-[${teste}%] h-5 rounded-[20px] bg-blu`} />
+            <div
+              className={`w-[${teste}%] h-5 rounded-[20px] bg-gradient-to-r from-[#2D7CFF] via-[#4F55FF] to-[#7A1EFF]`}
+            />
           </div>
         </div>
 
