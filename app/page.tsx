@@ -24,19 +24,27 @@ export default async function CreateCount() {
   async function testeFunction(formData: FormData) {
     "use server";
 
-    const data = Object.fromEntries(formData.entries());
+    const data = {
+      nome: formData.get("nome"),
+      email: formData.get("email"),
+      senha: formData.get("senha"),
+      telefone: formData.get("telefone"),
+      CNPJ: formData.get("CNPJ"),
+    };
 
     try {
       await fetch("http://localhost:8888/user_pending", {
         method: "POST",
         headers: {
-          "content-Type": "applycation/json",
+          "content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
     } catch (Erro) {
       throw new Error("dados não enviados para o backend");
     }
+
+    alert("empresa cadastrada com sucesso!");
   }
 
   return (
