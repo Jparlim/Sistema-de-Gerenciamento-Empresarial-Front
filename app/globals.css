@@ -16,7 +16,7 @@
 
 h1 {
   font-weight: 600;
-  font-size: 48px;
+  font-size: 60px;
 }
 
 h3 {
@@ -27,6 +27,9 @@ h3 {
 input {
   border: 2px solid var(--gra);
   border-radius: 10px;
+
+  padding-top: 12px;
+  padding-bottom: 12px;
 
   outline: none;
 }
@@ -70,4 +73,10 @@ body {
 
   margin: 0;
   padding: 0;
+}
+
+span {
+  color: #1d4ed8;
+  font-weight: 600;
+  cursor: pointer;
 }

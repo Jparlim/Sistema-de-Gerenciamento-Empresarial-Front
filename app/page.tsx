@@ -1,5 +1,6 @@
 import logo from "@/public/logoCreatePage.png";
 import lock from "@/public/Lock.png";
+import Link from "next/link";
 
 interface UserData {
   nome: string;
@@ -9,13 +10,12 @@ interface UserData {
   telefone: string;
 }
 
-export default async function CreateCount() {
+export default function CreateCount() {
   const teste = 50;
   const teste2 = true;
 
   async function testeFunction(formData: FormData) {
     "use server";
-
     const data = {
       nome: formData.get("nome"),
       email: formData.get("email"),
@@ -35,17 +35,15 @@ export default async function CreateCount() {
     } catch (Erro) {
       throw new Error("dados não enviados para o backend");
     }
-
-    alert("empresa cadastrada com sucesso!");
   }
 
   return (
     <main className="w-full flex justify-center gap-8">
-      <img src={logo.src} width={800} />
+      <img src={logo.src} width={800} className="" />
 
-      <div className="flex flex-col mt-10 gap-4">
-        <h1>Criar conta</h1>
-        <p className="text-[20px]">
+      <div className="w-4/12 flex flex-col gap-6 mt-12">
+        <h1 className="text-center">Criar conta</h1>
+        <p className="text-center text-gray-500">
           Antes de continuar, confirme seu email para receber o token de
           ativação
         </p>
@@ -73,38 +71,66 @@ export default async function CreateCount() {
               type="text"
               placeholder=""
               name="nome"
-              className="w-full py-2 pl-2"
+              className="w-full pl-2"
             />
           </div>
           <div>
             <h3>Email</h3>
-            <input type="text" name="email" className="w-full py-2 pl-2" />
-          </div>
-          <div className="relative">
-            <h3>Senha</h3>
-            <input type="text" name="senha" className="w-full py-2 pl-11" />
-            <img
-              src={lock.src}
-              width={25}
-              height={25}
-              className="absolute top-[46px] left-3 cursor-pointer"
-              // onClick={}
+            <input
+              type="text"
+              name="email"
+              className="w-full pl-2"
+              placeholder="nome@provedor.com"
             />
           </div>
-          <div>
-            <h3>Telefone</h3>
-            <input type="text" name="telefone" className="w-full py-2 pl-2" />
-          </div>
-          <div className="flex justify-between items-end">
-            <div className="w-[60%]">
-              <h3>CNPJ</h3>
-              <input type="text" name="CNPJ" className="w-full py-2 pl-2" />
+
+          <div className="flex gap-6">
+            <div className="w-full relative">
+              <h3>Senha</h3>
+              <input
+                type="text"
+                name="senha"
+                className="w-full pl-11"
+                placeholder=""
+              />
+              <img
+                src={lock.src}
+                width={25}
+                height={25}
+                className="absolute top-[50px] left-3 cursor-pointer"
+                // onClick={}
+              />
             </div>
-            <button type="submit" className="w-[30%] h-12">
+
+            <div className="w-full">
+              <h3>Telefone</h3>
+              <input
+                type="text"
+                name="telefone"
+                className="w-full pl-2"
+                placeholder="xx (xx) xxxx-xxxx"
+              />
+            </div>
+          </div>
+          <div className="flex justify-between items-end gap-6">
+            <div className="w-[50%]">
+              <h3>CNPJ</h3>
+              <input
+                type="text"
+                name="CNPJ"
+                className="w-full pl-2"
+                placeholder="XX.XXX.XXX/XXXX-XX"
+              />
+            </div>
+            <button type="submit" className="w-[50%] h-14">
               Enviar token
             </button>
           </div>
         </form>
+
+        <Link href="/login" className="m-auto">
+          <span>-- Voltar para o login</span>
+        </Link>
       </div>
     </main>
   );
