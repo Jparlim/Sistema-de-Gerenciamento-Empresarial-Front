@@ -1,18 +1,9 @@
-"use client";
-
 import Link from "next/link";
 import OtpInput from "@/components/OtpInput";
 import logo2 from "@/public/logoTokenPage.png";
 import postal from "@/public/postal.png";
 
 export default function PageVerificacao() {
-  const teste = 50;
-  const teste2 = true;
-
-  const handleCodeComplete = (codigoCompleto: string) => {
-    console.log("Código digitado:", codigoCompleto);
-  };
-
   return (
     <main className="flex justify-start -ml-50">
       <img src={logo2.src} width={1000} className="" />
@@ -31,23 +22,19 @@ export default function PageVerificacao() {
           abaixo para confirmar sua conta.
         </p>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col w-full gap-1">
           <div className="flex justify-between mx-2">
             <p className="text-[26px] font-semibold">Passo 1</p>
-            {!teste2 ? (
-              <p className="text-[26px] font-semibold">Passo 2</p>
-            ) : (
-              <p className="text-[26px] text-gray-400 font-semibold">Passo 2</p>
-            )}
+            <p className="text-[26px] font-semibold">Passo 2</p>
           </div>
           <div className={`w-full h-5 rounded-[20px] bg-gra`}>
             <div
-              className={`w-[${teste}%] h-5 rounded-[20px] bg-gradient-to-r from-[#2D7CFF] via-[#4F55FF] to-[#7A1EFF]`}
+              className={`w-full h-5 rounded-[20px] bg-gradient-to-r from-[#2D7CFF] via-[#4F55FF] to-[#7A1EFF]`}
             />
           </div>
         </div>
 
-        <OtpInput onComplete={handleCodeComplete} />
+        <OtpInput />
 
         <div className="flex justify-center items-center mt-18 gap-5 px-6 bg-blue-50 rounded-2xl h-26">
           <img
@@ -63,8 +50,6 @@ export default function PageVerificacao() {
             <p>Não compartilhe este código com ninguém.</p>
           </label>
         </div>
-
-        <button className="w-[50%] h-15 mt-12">Verificar código</button>
 
         <p className="flex gap-2 mt-6">
           Não recebeu o código?

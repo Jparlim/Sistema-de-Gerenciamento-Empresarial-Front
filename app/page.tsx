@@ -27,6 +27,7 @@ export default function CreateCount() {
     try {
       await fetch("http://localhost:8888/user_pending", {
         method: "POST",
+        credentials: "include",
         headers: {
           "content-Type": "application/json",
         },

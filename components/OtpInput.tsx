@@ -6,6 +6,7 @@ import {
   ChangeEvent,
   KeyboardEvent,
   ClipboardEvent,
+  FormEvent,
 } from "react";
 
 interface OtpInputProps {
@@ -13,7 +14,7 @@ interface OtpInputProps {
   onComplete?: (code: string) => void;
 }
 
-export default function OtpInput({ length = 6, onComplete }: OtpInputProps) {
+export default function OtpInput({ length = 6 }: OtpInputProps) {
   const [otp, setOtp] = useState<string[]>(Array(length).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -28,11 +29,6 @@ export default function OtpInput({ length = 6, onComplete }: OtpInputProps) {
 
     if (value && index < length - 1) {
       inputRefs.current[index + 1]?.focus();
-    }
-
-    const combinedCode = newOtp.join("");
-    if (combinedCode.length === length && onComplete) {
-      onComplete(combinedCode);
     }
   };
 
@@ -56,17 +52,25 @@ export default function OtpInput({ length = 6, onComplete }: OtpInputProps) {
 
     const nextIndex = Math.min(pastedData.length, length - 1);
     inputRefs.current[nextIndex]?.focus();
+  };
 
-    if (pastedData.length === length && onComplete) {
-      onComplete(pastedData);
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    const code = otp.join("");
+
+    console.log(JSON.stringify(code));
+
+    if (code.length < length) {
+      alert(`Por favor, preencha todos os ${length} dígitos do código.`);
+      return;
     }
+
+    alert(code);
   };
 
   return (
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      className="flex flex-col items-center gap-2"
-    >
+    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-2">
       <label className="sr-only" htmlFor="otp-input-0">
         Código de verificação de {length} dígitos
       </label>
@@ -88,7 +92,7 @@ export default function OtpInput({ length = 6, onComplete }: OtpInputProps) {
             onChange={(e) => handleChange(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             onPaste={handlePaste}
-            className="w-20 h-15 mt-10 text-center text-xl font-semibold text-gray-800 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+            className="w-14 h-14 mt-10 text-center text-xl font-semibold text-gray-800 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
           />
         ))}
       </div>
@@ -96,6 +100,13 @@ export default function OtpInput({ length = 6, onComplete }: OtpInputProps) {
       <p className="text-xs text-gray-400 mt-1">
         O código possui {length} dígitos
       </p>
+
+      <button
+        type="submit"
+        className="w-[50%] h-12 mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all shadow-sm active:scale-95"
+      >
+        Verificar código
+      </button>
     </form>
   );
 }
