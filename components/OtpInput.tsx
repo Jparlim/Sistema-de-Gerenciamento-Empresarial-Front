@@ -1,5 +1,6 @@
 "use client";
 
+import { error } from "console";
 import {
   useState,
   useRef,
@@ -54,19 +55,26 @@ export default function OtpInput({ length = 6 }: OtpInputProps) {
     inputRefs.current[nextIndex]?.focus();
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const code = otp.join("");
-
-    console.log(JSON.stringify(code));
 
     if (code.length < length) {
       alert(`Por favor, preencha todos os ${length} dígitos do código.`);
       return;
     }
 
-    alert(code);
+    try {
+      return await fetch("http://localhost:8888/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: code }),
+        credentials: "include",
+      });
+    } catch (er) {
+      console.log(er);
+    }
   };
 
   return (

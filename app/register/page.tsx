@@ -1,14 +1,7 @@
 import logo from "@/public/logoCreatePage.png";
 import lock from "@/public/Lock.png";
 import Link from "next/link";
-
-interface UserData {
-  nome: string;
-  email: string;
-  senha: string;
-  CNPJ: string;
-  telefone: string;
-}
+import { redirect } from "next/navigation";
 
 export default function CreateCount() {
   const teste = 50;
@@ -16,13 +9,16 @@ export default function CreateCount() {
 
   async function testeFunction(formData: FormData) {
     "use server";
+
     const data = {
       nome: formData.get("nome"),
       email: formData.get("email"),
       senha: formData.get("senha"),
-      telefone: formData.get("telefone"),
       CNPJ: formData.get("CNPJ"),
+      telefone: formData.get("telefone"),
     };
+
+    const verify = Object.entries(data).some((value) => !value);
 
     try {
       await fetch("http://localhost:8888/user_pending", {
@@ -34,8 +30,10 @@ export default function CreateCount() {
         body: JSON.stringify(data),
       });
     } catch (Erro) {
-      throw new Error("dados não enviados para o backend");
+      console.log(Erro);
     }
+
+    redirect("/token");
   }
 
   return (
