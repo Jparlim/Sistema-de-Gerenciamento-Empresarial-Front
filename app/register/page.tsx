@@ -33,7 +33,12 @@ type FormState = {
   CNPJ: string;
 };
 
-type FormResponse = { success: true; email: string; expiresIn: number; devToken?: string };
+type FormResponse = {
+  success: true;
+  email: string;
+  expiresIn: number;
+  devToken?: string;
+};
 
 export default function CreateCount() {
   const router = useRouter();
@@ -88,7 +93,11 @@ export default function CreateCount() {
 
       router.push("/token");
     } catch (err) {
-      setErro(err instanceof ApiError ? err.message : "Não foi possível concluir o cadastro. Tente novamente.");
+      setErro(
+        err instanceof ApiError
+          ? err.message
+          : "Não foi possível concluir o cadastro. Tente novamente.",
+      );
     } finally {
       setLoading(false);
     }
@@ -169,7 +178,9 @@ export default function CreateCount() {
                 className="w-full pl-2"
                 placeholder="(xx) xxxxx-xxxx"
                 value={form.telefone}
-                onChange={(e) => updateField("telefone", maskTelefone(e.target.value))}
+                onChange={(e) =>
+                  updateField("telefone", maskTelefone(e.target.value))
+                }
               />
             </div>
           </div>
@@ -190,7 +201,9 @@ export default function CreateCount() {
             </button>
           </div>
 
-          {erro && <p className="text-red-600 font-semibold text-center">{erro}</p>}
+          {erro && (
+            <p className="text-red-600 font-semibold text-center">{erro}</p>
+          )}
         </form>
 
         <Link href="/" className="m-auto">
