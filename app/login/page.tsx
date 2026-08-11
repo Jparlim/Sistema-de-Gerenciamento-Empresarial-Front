@@ -6,6 +6,7 @@ import logo from "@/public/logoCreatePage.png";
 import lock from "@/public/Lock.png";
 import Link from "next/link";
 import { apiFetch, ApiError } from "@/lib/api";
+import { getIA } from "@/lib/ia";
 
 type FormState = {
   email: string;
@@ -53,7 +54,12 @@ export default function Login() {
         body: JSON.stringify(form),
       });
 
-      router.push("/home");
+      try {
+        const ia = await getIA();
+        router.push(ia ? "/home" : "/configuracao-ia");
+      } catch {
+        router.push("/home");
+      }
     } catch (err) {
       setErro(
         err instanceof ApiError

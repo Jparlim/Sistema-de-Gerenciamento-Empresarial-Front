@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, ChangeEvent, KeyboardEvent, ClipboardEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { apiFetch, ApiError } from "@/lib/api";
+import { getIA } from "@/lib/ia";
 
 interface OtpInputProps {
   length?: number;
@@ -77,7 +78,12 @@ export default function OtpInput({ length = 6 }: OtpInputProps) {
         body: JSON.stringify({ token: code }),
       });
 
-      router.push("/home");
+      try {
+        const ia = await getIA();
+        router.push(ia ? "/home" : "/configuracao-ia");
+      } catch {
+        router.push("/home");
+      }
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
         router.push("/register");

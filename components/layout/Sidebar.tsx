@@ -17,8 +17,8 @@ type MenuItem = {
 const menuItems: MenuItem[] = [
   { label: "Tela inicial", icon: homeIcon, href: "/home" },
   { label: "Estoque", icon: clipboardIcon },
-  { label: "Configuração IA", icon: toolIcon },
-  { label: "Clientes", icon: usersIcon },
+  { label: "Configuração IA", icon: toolIcon, href: "/configuracao-ia" },
+  { label: "Clientes", icon: usersIcon, href: "/clientes" },
   { label: "Financeiro", icon: barIcon },
   { label: "Agenda", icon: calendarIcon },
 ];
