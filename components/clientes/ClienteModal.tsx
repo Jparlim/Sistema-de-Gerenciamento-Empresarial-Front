@@ -8,7 +8,13 @@ const STATUS_OPTIONS: ClienteStatus[] = ["Fechado", "DesistÃªncia", "Em NegociaÃ
 type ClienteModalProps = {
   cliente: Cliente;
   onClose: () => void;
-  onSave: (nome: string, contato: string, status: ClienteStatus, resumo: string) => void;
+  onSave: (
+    nome: string,
+    contato: string,
+    status: ClienteStatus,
+    resumo: string,
+    valorPotencial: number,
+  ) => void;
   saving: boolean;
 };
 
@@ -22,6 +28,9 @@ export default function ClienteModal({
   const [contato, setContato] = useState(cliente.contato);
   const [status, setStatus] = useState<ClienteStatus>(cliente.status);
   const [resumo, setResumo] = useState(cliente.resumo);
+  const [valorPotencial, setValorPotencial] = useState(
+    cliente.valorPotencial ?? 0,
+  );
   const [erro, setErro] = useState<string | null>(null);
 
   function handleSubmit(e: FormEvent) {
@@ -32,7 +41,7 @@ export default function ClienteModal({
       return;
     }
 
-    onSave(nome.trim(), contato.trim(), status, resumo);
+    onSave(nome.trim(), contato.trim(), status, resumo, valorPotencial);
   }
 
   return (
@@ -91,6 +100,20 @@ export default function ClienteModal({
                 </option>
               ))}
             </select>
+          </div>
+
+          <div>
+            <p className="text-sm font-semibold text-gray-700 mb-1">
+              Valor potencial (R$)
+            </p>
+            <input
+              type="number"
+              min={0}
+              step="0.01"
+              className="w-full pl-2"
+              value={valorPotencial}
+              onChange={(e) => setValorPotencial(Number(e.target.value))}
+            />
           </div>
 
           <div>

@@ -9,6 +9,7 @@ export type Cliente = {
   date: string;
   resumo: string;
   status: ClienteStatus;
+  valorPotencial: number | null;
 };
 
 export type UpdateClientePayload = {
@@ -16,6 +17,7 @@ export type UpdateClientePayload = {
   contato?: string;
   status?: ClienteStatus;
   resumo?: string;
+  valorPotencial?: number;
 };
 
 export async function listClientes() {

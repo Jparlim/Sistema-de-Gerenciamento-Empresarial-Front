@@ -49,6 +49,7 @@ export default function Clientes() {
     contato: string,
     status: ClienteStatus,
     resumo: string,
+    valorPotencial: number,
   ) {
     if (!editando) return;
 
@@ -59,6 +60,7 @@ export default function Clientes() {
         contato,
         status,
         resumo,
+        valorPotencial,
       });
       setClientes((prev) =>
         prev.map((c) => (c.id === atualizado.id ? atualizado : c)),
