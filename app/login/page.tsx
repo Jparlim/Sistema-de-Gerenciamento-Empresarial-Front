@@ -75,13 +75,13 @@ export default function Login() {
     <main className="w-full flex justify-center gap-8">
       <img src={logo.src} width={800} alt="" />
 
-      <div className="w-4/12 flex flex-col gap-6 mt-12">
+      <div className="w-4/12 flex flex-col gap-6 mt-14">
         <h1 className="text-center">Entrar</h1>
         <p className="text-center text-gray-500">
           Acesse sua conta para continuar
         </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div>
             <h3>Email</h3>
             <input
@@ -113,7 +113,11 @@ export default function Login() {
             />
           </div>
 
-          <button type="submit" disabled={loading} className="w-full h-14">
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-2xs h-14 mx-auto my-8"
+          >
             {loading ? "Entrando..." : "Entrar"}
           </button>
 
@@ -122,7 +126,7 @@ export default function Login() {
           )}
         </form>
 
-        <Link href="/register" className="m-auto">
+        <Link href="/register" className="mx-auto my-10">
           <span>Não tem uma conta? Criar conta</span>
         </Link>
       </div>
