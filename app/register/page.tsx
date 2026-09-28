@@ -206,8 +206,9 @@ export default function CreateCount() {
           )}
         </form>
 
-        <Link href="/" className="m-auto">
-          <span>-- Voltar para o login</span>
+        <Link href="/" className="mx-auto flex my-10 gap-4">
+          <p>já tem uma conta? </p>
+          <span> Entrar</span>
         </Link>
       </div>
     </main>

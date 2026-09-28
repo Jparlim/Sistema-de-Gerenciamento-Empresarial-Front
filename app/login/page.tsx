@@ -81,7 +81,7 @@ export default function Login() {
           Acesse sua conta para continuar
         </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8 mt-10">
           <div>
             <h3>Email</h3>
             <input
@@ -126,8 +126,9 @@ export default function Login() {
           )}
         </form>
 
-        <Link href="/register" className="mx-auto my-10">
-          <span>Não tem uma conta? Criar conta</span>
+        <Link href="/register" className="mx-auto flex my-10 gap-4">
+          <p>Não tem uma conta? </p>
+          <span> Criar conta</span>
         </Link>
       </div>
     </main>

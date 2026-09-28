@@ -115,10 +115,6 @@ export default function LoginAdm() {
             <p className="text-red-600 font-semibold text-center">{erro}</p>
           )}
         </form>
-
-        <Link href="/register" className="mx-auto my-10">
-          <span>Não tem uma conta? Criar conta</span>
-        </Link>
       </div>
     </main>
   );
