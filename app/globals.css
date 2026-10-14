@@ -9,11 +9,6 @@
   --gra: #0000000e;
 }
 
-@theme {
-  --color-blu: var(--blu);
-  --color-gra: var(--gra);
-}
-
 h1 {
   font-weight: 600;
   font-size: 60px;

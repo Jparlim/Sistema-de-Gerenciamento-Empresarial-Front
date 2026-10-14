@@ -6,6 +6,7 @@ import logo from "@/public/logoCreatePage.png";
 import lock from "@/public/Lock.png";
 import Link from "next/link";
 import { apiFetch, ApiError } from "@/lib/api";
+import Image from "next/image";
 
 function maskCNPJ(value: string) {
   return value
@@ -105,7 +106,7 @@ export default function CreateCount() {
 
   return (
     <main className="w-full flex justify-center gap-8">
-      <img src={logo.src} width={800} alt="" />
+      <Image src={logo.src} width={800} loading="eager" alt="" height={900} />
 
       <div className="w-4/12 flex flex-col gap-6 mt-12">
         <h1 className="text-center">Criar conta</h1>
@@ -121,7 +122,7 @@ export default function CreateCount() {
           </div>
           <div className="w-full h-5 rounded-[20px] bg-gra">
             <div
-              className="h-5 rounded-[20px] bg-gradient-to-r from-[#2D7CFF] via-[#4F55FF] to-[#7A1EFF]"
+              className="h-5 rounded-[20px] bg-linear-to-r from-[#2D7CFF] via-[#4F55FF] to-[#7A1EFF]"
               style={{ width: "50%" }}
             />
           </div>
@@ -160,12 +161,12 @@ export default function CreateCount() {
                 value={form.senha}
                 onChange={(e) => updateField("senha", e.target.value)}
               />
-              <img
+              <Image
                 src={lock.src}
                 width={25}
                 height={25}
                 alt="mostrar senha"
-                className="absolute top-[50px] left-3 cursor-pointer"
+                className="absolute top-12.5 left-3 cursor-pointer"
                 onClick={() => setMostrarSenha((v) => !v)}
               />
             </div>
