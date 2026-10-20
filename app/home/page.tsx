@@ -36,32 +36,46 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [deletingId, setDeletingId] = useState<number | null>(null);
 
-  const fetchVisits = useCallback(async () => {
-    setLoading(true);
-    setErro(null);
-    try {
-      const data = await listVisits(year, month);
-      setVisits(data);
-    } catch (err) {
-      if (err instanceof ApiError && err.status === 401) {
-        router.push("/register");
-        return;
+  useEffect(() => {
+    let active = true;
+
+    async function loadVisits() {
+      try {
+        const data = await listVisits(year, month);
+
+        if (active) {
+          setVisits(data);
+        }
+      } catch (err) {
+        if (!active) return;
+
+        if (err instanceof ApiError && err.status === 401) {
+          router.push("/register");
+          return;
+        }
+
+        setErro(
+          err instanceof ApiError
+            ? err.message
+            : "Não foi possível carregar as visitas.",
+        );
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
       }
-      setErro(
-        err instanceof ApiError
-          ? err.message
-          : "Não foi possível carregar as visitas.",
-      );
-    } finally {
-      setLoading(false);
     }
+
+    void loadVisits();
+
+    return () => {
+      active = false;
+    };
   }, [year, month, router]);
 
-  useEffect(() => {
-    fetchVisits();
-  }, [fetchVisits]);
-
   function handleMonthChange(newYear: number, newMonth: number) {
+    setLoading(true);
+    setErro(null);
     setYear(newYear);
     setMonth(newMonth);
     setSelectedDate(null);
@@ -106,18 +120,20 @@ export default function Home() {
 
   return (
     <AppShell>
-      <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
-        <h1 className="text-4xl font-semibold">Visitas Agendadas</h1>
+      <div className="mb-6 flex flex-col items-stretch justify-between gap-4 sm:mb-8 sm:flex-row sm:items-center">
+        <h1 className="text-3xl font-semibold sm:text-4xl">
+          Visitas Agendadas
+        </h1>
         <button
           type="button"
           onClick={() => setShowModal(true)}
-          className="px-6 h-12"
+          className="h-12 w-full px-6 sm:w-auto"
         >
           + Adicionar visita
         </button>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm p-6 mb-6 inline-flex flex-col">
+      <div className="mb-5 inline-flex w-full flex-col rounded-2xl border border-[#ececf4] bg-white p-5 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:mb-6 sm:w-auto sm:min-w-52 sm:p-6">
         <p className="text-sm text-gray-400">
           Visitas em {MONTH_NAMES[month - 1]}/{year}
         </p>
@@ -128,7 +144,7 @@ export default function Home() {
 
       {erro && <p className="text-red-600 font-semibold mb-4">{erro}</p>}
 
-      <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-6 items-start">
+      <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(300px,380px)_minmax(0,1fr)] xl:gap-6">
         <MonthCalendar
           year={year}
           month={month}
@@ -139,7 +155,7 @@ export default function Home() {
         />
 
         {loading ? (
-          <div className="bg-white rounded-2xl shadow-sm p-6 w-full flex items-center justify-center text-gray-400 text-sm min-h-[200px]">
+          <div className="bg-white rounded-2xl shadow-sm p-6 w-full flex items-center justify-center text-gray-400 text-sm min-h-50">
             Carregando visitas...
           </div>
         ) : (

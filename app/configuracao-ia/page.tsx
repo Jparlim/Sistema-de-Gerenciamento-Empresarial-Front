@@ -51,11 +51,18 @@ export default function ConfiguracaoIA() {
       .finally(() => setLoading(false));
   }, []);
 
-  function updateField<K extends keyof FormState>(field: K, value: FormState[K]) {
+  function updateField<K extends keyof FormState>(
+    field: K,
+    value: FormState[K],
+  ) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleSaveDado(nomeAnterior: string | null, nome: string, tipo: string) {
+  function handleSaveDado(
+    nomeAnterior: string | null,
+    nome: string,
+    tipo: string,
+  ) {
     setDados((prev) => {
       const next = { ...prev };
       if (nomeAnterior && nomeAnterior !== nome) delete next[nomeAnterior];
@@ -77,7 +84,11 @@ export default function ConfiguracaoIA() {
     setErro(null);
     setSalvo(false);
 
-    if (!form.nomeEmpresa.trim() || !form.nomeIA.trim() || !form.instructions.trim()) {
+    if (
+      !form.nomeEmpresa.trim() ||
+      !form.nomeIA.trim() ||
+      !form.instructions.trim()
+    ) {
       setErro("Preencha nome da empresa, nome da IA e instruções gerais.");
       return;
     }
@@ -109,13 +120,15 @@ export default function ConfiguracaoIA() {
 
   return (
     <AppShell>
-      <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
-        <h1 className="text-4xl font-medium">Configuração da Inteligência Artificial</h1>
+      <div className="mb-6 flex flex-col items-stretch justify-between gap-4 sm:mb-8 sm:flex-row sm:items-center">
+        <h1 className="text-3xl font-semibold sm:text-4xl">
+          Configuração da Inteligência Artificial
+        </h1>
         <button
           type="button"
           onClick={handleSave}
           disabled={saving}
-          className="!bg-blu !bg-none rounded-2xl px-6 h-14"
+          className="h-12 w-full rounded-xl px-6 font-semibold sm:h-14 sm:w-auto"
         >
           {saving ? "Salvando..." : "salvar alterações"}
         </button>
@@ -128,10 +141,10 @@ export default function ConfiguracaoIA() {
         </p>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)] xl:gap-6">
         <div className="flex flex-col gap-6">
-          <div>
-            <h2 className="text-[26px] font-normal mb-4">Identidade da IA</h2>
+          <div className="rounded-2xl border border-[#ececf4] bg-white p-5 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:p-7">
+            <h2 className="mb-5 text-xl font-semibold sm:text-2xl">Identidade da IA</h2>
 
             <div className="flex flex-col gap-4">
               <div>
@@ -173,7 +186,7 @@ export default function ConfiguracaoIA() {
           </div>
 
           <div>
-            <h2 className="text-[26px] font-normal mb-4">
+            <h2 className="mb-4 text-xl font-semibold sm:text-2xl">
               Dados que a IA deve coletar
             </h2>
 
@@ -186,17 +199,17 @@ export default function ConfiguracaoIA() {
           </div>
         </div>
 
-        <div className="bg-blue-50 rounded-2xl p-6">
+        <div className="rounded-2xl border border-[#e4ddff] bg-[linear-gradient(145deg,#f5f2ff_0%,#eef5ff_100%)] p-5 sm:p-7">
           {isNew ? (
             <>
-              <h2 className="text-xl font-semibold text-blue-900 mb-2">
+              <h2 className="mb-2 text-xl font-semibold text-[#433e67]">
                 Bem-vindo! Vamos configurar sua IA
               </h2>
-              <p className="text-blue-900 mb-4">
+              <p className="mb-4 text-[#433e67]">
                 Antes de usar o sistema, configure como a sua IA deve se
                 comportar ao conversar com os clientes pelo WhatsApp.
               </p>
-              <ul className="list-disc pl-5 flex flex-col gap-2 text-blue-900">
+              <ul className="flex list-disc flex-col gap-2 pl-5 text-[#433e67]">
                 <li>
                   Preencha o nome da sua empresa e escolha um nome para a IA.
                 </li>
@@ -205,19 +218,19 @@ export default function ConfiguracaoIA() {
                   responder seus clientes.
                 </li>
                 <li>
-                  Defina quais dados a IA deve coletar durante a conversa
-                  (nome, telefone, endereço, etc.).
+                  Defina quais dados a IA deve coletar durante a conversa (nome,
+                  telefone, endereço, etc.).
                 </li>
                 <li>
-                  Quando terminar, clique em &quot;salvar alterações&quot;
-                  para ativar sua IA.
+                  Quando terminar, clique em &quot;salvar alterações&quot; para
+                  ativar sua IA.
                 </li>
               </ul>
             </>
           ) : (
             <>
-              <h2 className="text-xl font-semibold text-blue-900 mb-2">Dica</h2>
-              <p className="text-blue-900">
+              <h2 className="mb-2 text-xl font-semibold text-[#433e67]">Dica</h2>
+              <p className="text-[#433e67]">
                 Você pode voltar aqui a qualquer momento para ajustar as
                 instruções da IA ou os dados que ela deve coletar durante o
                 atendimento.

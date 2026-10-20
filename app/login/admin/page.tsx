@@ -2,9 +2,11 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import lock from "@/public/Lock.png";
-import Link from "next/link";
+import eyesOn from "@/public/eyesOn.svg";
+import eyesOff from "@/public/eyesOff.svg";
 import { apiFetch, ApiError } from "@/lib/api";
+import Image from "next/image";
+import logo from "@/public/Logo.png";
 
 type FormState = {
   email: string;
@@ -64,21 +66,30 @@ export default function LoginAdm() {
   }
 
   return (
-    <main className="w-full flex justify-center gap-8">
-      <div className="w-4/12 flex flex-col gap-6 mt-14">
-        <h1 className="text-center">Entrar</h1>
-        <p className="text-center text-gray-500">
+    <main className="flex min-h-dvh w-full items-center justify-center bg-[radial-gradient(ellipse_at_top_left,#e8f0ff_0%,#f5f2ff_34%,#f7f8fc_72%)] px-4 py-8 sm:px-6">
+      <div className="w-full max-w-xl rounded-3xl border border-white bg-white/90 p-8 shadow-[0_24px_80px_rgba(42,38,100,0.12)] backdrop-blur sm:p-12">
+        <Image
+          src={logo}
+          width={900}
+          height={900}
+          alt=""
+          className="mx-auto mb-5 h-32 w-32 object-contain sm:h-40 sm:w-40"
+        />
+        <p className="mb-4 text-center text-sm font-bold tracking-[0.16em] text-[#6754d9] sm:tracking-[0.2em]">
+          QUANTYUM · ADMIN
+        </p>
+        <h1 className="text-center text-3xl sm:text-4xl">Entrar</h1>
+        <p className="mt-2 text-center leading-relaxed text-gray-500">
           Acesse sua conta para continuar
         </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+        <form onSubmit={handleSubmit} className="mt-9 flex flex-col gap-7">
           <div>
             <h3>Email</h3>
             <input
               type="email"
               name="email"
               className="w-full pl-2"
-              placeholder="nome@provedor.com"
               value={form.email}
               onChange={(e) => updateField("email", e.target.value)}
             />
@@ -93,12 +104,12 @@ export default function LoginAdm() {
               value={form.senha}
               onChange={(e) => updateField("senha", e.target.value)}
             />
-            <img
-              src={lock.src}
+            <Image
+              src={mostrarSenha ? eyesOn : eyesOff}
               width={25}
               height={25}
               alt="mostrar senha"
-              className="absolute top-[50px] left-3 cursor-pointer"
+              className="absolute top-11 left-3 cursor-pointer"
               onClick={() => setMostrarSenha((v) => !v)}
             />
           </div>
@@ -106,7 +117,7 @@ export default function LoginAdm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-2xs h-14 mx-auto my-8"
+            className="mt-2 h-12 w-full font-semibold"
           >
             {loading ? "Entrando..." : "Entrar"}
           </button>

@@ -133,12 +133,12 @@ export default function Estoque() {
 
   return (
     <AppShell>
-      <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
-        <h1 className="text-4xl font-medium">Estoque</h1>
+      <div className="mb-6 flex flex-col items-stretch justify-between gap-4 sm:mb-8 sm:flex-row sm:items-center">
+        <h1 className="text-3xl font-semibold sm:text-4xl">Estoque</h1>
         <button
           type="button"
           onClick={() => setCriando(true)}
-          className="px-6 h-12"
+          className="h-12 w-full px-6 sm:w-auto"
         >
           + Adicionar produto
         </button>

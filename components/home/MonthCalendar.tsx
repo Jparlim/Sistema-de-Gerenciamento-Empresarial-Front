@@ -2,7 +2,7 @@
 
 import { Visit } from "@/lib/visits";
 
-const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+const WEEKDAYS = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
 const MONTH_NAMES = [
   "Janeiro",
   "Fevereiro",
@@ -69,7 +69,7 @@ export default function MonthCalendar({
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-6 w-full">
+    <div className="w-full rounded-2xl border border-[#ececf4] bg-white p-4 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:p-6">
       <div className="flex items-center justify-between mb-4">
         <button
           type="button"
@@ -112,13 +112,23 @@ export default function MonthCalendar({
               key={dateStr}
               type="button"
               onClick={() => handleDayClick(day)}
-              className={`relative mx-auto flex w-8 h-8 rounded-full! text-sm shadow-none transition-colors ${
-                isSelected
-                  ? "bg-none! bg-blu! text-white! font-semibold"
+              className="relative mx-auto flex items-center justify-center rounded-full! text-sm shadow-none transition-colors"
+              style={{
+                width: 32,
+                height: 32,
+                minHeight: 32,
+                background: isSelected
+                  ? "var(--blu)"
                   : isToday
-                    ? "bg-none! bg-blue-50! text-blu! font-semibold"
-                    : "bg-none! bg-transparent! text-gray-700! hover:bg-none! hover:bg-gray-100!"
-              }`}
+                    ? "#f1eeff"
+                    : "transparent",
+                color: isSelected
+                  ? "white"
+                  : isToday
+                    ? "var(--blu)"
+                    : "#374151",
+                ...(isSelected || isToday ? { fontWeight: 600 } : {}),
+              }}
             >
               {day}
               {hasVisit && !isSelected && (
@@ -128,16 +138,6 @@ export default function MonthCalendar({
           );
         })}
       </div>
-
-      {selectedDate && (
-        <button
-          type="button"
-          onClick={() => onSelectDate(null)}
-          className="bg-none! bg-transparent! shadow-none text-xs text-blu! font-semibold mt-4 p-0! justify-start!"
-        >
-          Ver mês inteiro
-        </button>
-      )}
     </div>
   );
 }

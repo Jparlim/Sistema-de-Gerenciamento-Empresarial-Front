@@ -40,13 +40,13 @@ export default function MovimentacoesTable({
   }
 
   return (
-    <div className="bg-white rounded-[20px] shadow-sm p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-medium">Movimentações do Mês</h2>
+    <div className="min-w-0 rounded-2xl border border-[#ececf4] bg-white p-4 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:p-6">
+      <div className="mb-4 flex flex-col items-stretch gap-3">
+        <h2 className="text-xl font-semibold sm:text-2xl">Movimentações do Mês</h2>
         <button
           type="button"
           onClick={() => setCriando(true)}
-          className="px-4 h-10 text-sm"
+          className="h-11 w-full px-5 text-sm font-semibold"
         >
           + Nova movimentação
         </button>
@@ -57,7 +57,8 @@ export default function MovimentacoesTable({
           Nenhuma movimentação neste mês.
         </p>
       ) : (
-        <table className="w-full text-sm">
+        <div className="overflow-x-auto">
+        <table className="w-full min-w-[440px] text-sm">
           <thead>
             <tr className="text-left text-gray-400 border-b border-gray-100">
               <th className="font-medium pb-3 pr-4">data</th>
@@ -91,6 +92,7 @@ export default function MovimentacoesTable({
             ))}
           </tbody>
         </table>
+        </div>
       )}
 
       {criando && (

@@ -95,14 +95,14 @@ export default function Clientes() {
 
   return (
     <AppShell>
-      <h1 className="text-4xl font-medium mb-8">Clientes</h1>
+      <h1 className="mb-6 text-3xl font-semibold sm:mb-8 sm:text-4xl">Clientes</h1>
 
       {erro && <p className="text-red-600 font-semibold mb-4">{erro}</p>}
 
       {loading ? (
         <p className="text-gray-400 text-sm">Carregando clientes...</p>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6 items-start">
+        <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-6">
           <div className="flex flex-col gap-6">
             <StatsGrid clientes={clientes} />
             <ClientesTable

@@ -2,9 +2,10 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import logo from "@/public/logoCreatePage.png";
-import lock from "@/public/Lock.png";
+import logo from "@/public/logoCreatePag.png";
 import Link from "next/link";
+import eyesOn from "@/public/eyesOn.svg";
+import eyesOff from "@/public/eyesOff.svg";
 import { apiFetch, ApiError } from "@/lib/api";
 import Image from "next/image";
 
@@ -88,9 +89,6 @@ export default function CreateCount() {
       });
 
       sessionStorage.setItem("registerEmail", data.email);
-      if (data.devToken) {
-        console.info("[dev] código de verificação:", data.devToken);
-      }
 
       router.push("/token");
     } catch (err) {
@@ -105,112 +103,139 @@ export default function CreateCount() {
   }
 
   return (
-    <main className="w-full flex justify-center gap-8">
-      <Image src={logo.src} width={800} loading="eager" alt="" height={900} />
+    <main className="flex min-h-dvh w-full items-center justify-center bg-[radial-gradient(ellipse_at_top_left,#e8f0ff_0%,#f5f2ff_34%,#f7f8fc_72%)] px-4 py-8 sm:px-6">
+      <div className="flex w-full max-w-7xl items-center justify-center gap-10 lg:gap-16">
+        <Image
+          src={logo}
+          width={900}
+          height={900}
+          loading="eager"
+          alt=""
+          className="hidden h-auto w-1/2 max-w-150 object-contain lg:block"
+        />
 
-      <div className="w-4/12 flex flex-col gap-6 mt-12">
-        <h1 className="text-center">Criar conta</h1>
-        <p className="text-center text-gray-500">
-          Antes de continuar, confirme seu email para receber o token de
-          ativação
-        </p>
+        <div className="flex w-full max-w-[620px] flex-col gap-5 rounded-3xl border border-white bg-white/90 p-5 shadow-[0_24px_80px_rgba(42,38,100,0.12)] backdrop-blur sm:p-9">
+          <div className="mb-1 text-center">
+            <p className="mb-2 text-sm font-bold tracking-[0.2em] text-[#6754d9]">
+              QUANTYUM
+            </p>
+            <h1 className="text-center text-3xl sm:text-4xl">Criar conta</h1>
+          </div>
+          <p className="text-center text-sm text-gray-500 sm:text-base">
+            Antes de continuar, confirme seu email para receber o token de
+            ativação
+          </p>
 
-        <div className="flex flex-col gap-1">
-          <div className="flex justify-between mx-2">
-            <p className="text-[26px] font-semibold">Passo 1</p>
-            <p className="text-[26px] text-gray-400 font-semibold">Passo 2</p>
+          <div className="flex flex-col gap-1">
+            <div className="flex justify-between mx-2">
+              <p className="text-lg font-semibold sm:text-xl">Passo 1</p>
+              <p className="text-lg font-semibold text-gray-400 sm:text-xl">
+                Passo 2
+              </p>
+            </div>
+            <div className="w-full h-5 rounded-[20px] bg-gra">
+              <div
+                className="h-5 rounded-[20px] bg-linear-to-r from-[#2D7CFF] via-[#4F55FF] to-[#7A1EFF]"
+                style={{ width: "50%" }}
+              />
+            </div>
           </div>
-          <div className="w-full h-5 rounded-[20px] bg-gra">
-            <div
-              className="h-5 rounded-[20px] bg-linear-to-r from-[#2D7CFF] via-[#4F55FF] to-[#7A1EFF]"
-              style={{ width: "50%" }}
-            />
-          </div>
+
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div>
+              <h3>Nome da empresa</h3>
+              <input
+                type="text"
+                name="nome"
+                autoComplete="organization"
+                className="w-full pl-2"
+                value={form.nome}
+                onChange={(e) => updateField("nome", e.target.value)}
+              />
+            </div>
+            <div>
+              <h3>Email</h3>
+              <input
+                type="email"
+                name="email"
+                autoComplete="email"
+                className="w-full pl-2"
+                placeholder="nome@provedor.com"
+                value={form.email}
+                onChange={(e) => updateField("email", e.target.value)}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
+              <div className="w-full relative">
+                <h3>Senha</h3>
+                <input
+                  type={mostrarSenha ? "text" : "password"}
+                  name="senha"
+                  autoComplete="new-password"
+                  className="w-full pl-11"
+                  value={form.senha}
+                  onChange={(e) => updateField("senha", e.target.value)}
+                />
+                <Image
+                  src={mostrarSenha ? eyesOn : eyesOff}
+                  width={25}
+                  height={25}
+                  alt="mostrar senha"
+                  className="absolute top-11 left-3 cursor-pointer"
+                  onClick={() => setMostrarSenha((v) => !v)}
+                />
+              </div>
+
+              <div className="w-full">
+                <h3>Telefone</h3>
+                <input
+                  type="text"
+                  name="telefone"
+                  autoComplete="tel"
+                  className="w-full pl-2"
+                  placeholder="(xx) xxxxx-xxxx"
+                  value={form.telefone}
+                  onChange={(e) =>
+                    updateField("telefone", maskTelefone(e.target.value))
+                  }
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 items-end gap-4 sm:grid-cols-2 sm:gap-6">
+              <div className="w-full">
+                <h3>CNPJ</h3>
+                <input
+                  type="text"
+                  name="CNPJ"
+                  autoComplete="organization"
+                  className="w-full pl-2"
+                  placeholder="XX.XXX.XXX/XXXX-XX"
+                  value={form.CNPJ}
+                  onChange={(e) =>
+                    updateField("CNPJ", maskCNPJ(e.target.value))
+                  }
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="h-12 w-full font-semibold sm:h-14"
+              >
+                {loading ? "Enviando..." : "Enviar token"}
+              </button>
+            </div>
+
+            {erro && (
+              <p className="text-red-600 font-semibold text-center">{erro}</p>
+            )}
+          </form>
+
+          <Link href="/" className="mx-auto mt-1 flex gap-1 text-sm">
+            <p className="mb-0 text-gray-500">Já tem uma conta?</p>
+            <span className="font-semibold text-[#5141d9]">Entrar</span>
+          </Link>
         </div>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div>
-            <h3>Nome da empresa</h3>
-            <input
-              type="text"
-              name="nome"
-              className="w-full pl-2"
-              value={form.nome}
-              onChange={(e) => updateField("nome", e.target.value)}
-            />
-          </div>
-          <div>
-            <h3>Email</h3>
-            <input
-              type="email"
-              name="email"
-              className="w-full pl-2"
-              placeholder="nome@provedor.com"
-              value={form.email}
-              onChange={(e) => updateField("email", e.target.value)}
-            />
-          </div>
-
-          <div className="flex gap-6">
-            <div className="w-full relative">
-              <h3>Senha</h3>
-              <input
-                type={mostrarSenha ? "text" : "password"}
-                name="senha"
-                className="w-full pl-11"
-                value={form.senha}
-                onChange={(e) => updateField("senha", e.target.value)}
-              />
-              <Image
-                src={lock.src}
-                width={25}
-                height={25}
-                alt="mostrar senha"
-                className="absolute top-12.5 left-3 cursor-pointer"
-                onClick={() => setMostrarSenha((v) => !v)}
-              />
-            </div>
-
-            <div className="w-full">
-              <h3>Telefone</h3>
-              <input
-                type="text"
-                name="telefone"
-                className="w-full pl-2"
-                placeholder="(xx) xxxxx-xxxx"
-                value={form.telefone}
-                onChange={(e) =>
-                  updateField("telefone", maskTelefone(e.target.value))
-                }
-              />
-            </div>
-          </div>
-          <div className="flex justify-between items-end gap-6">
-            <div className="w-[50%]">
-              <h3>CNPJ</h3>
-              <input
-                type="text"
-                name="CNPJ"
-                className="w-full pl-2"
-                placeholder="XX.XXX.XXX/XXXX-XX"
-                value={form.CNPJ}
-                onChange={(e) => updateField("CNPJ", maskCNPJ(e.target.value))}
-              />
-            </div>
-            <button type="submit" disabled={loading} className="w-[50%] h-14">
-              {loading ? "Enviando..." : "Enviar token"}
-            </button>
-          </div>
-
-          {erro && (
-            <p className="text-red-600 font-semibold text-center">{erro}</p>
-          )}
-        </form>
-
-        <Link href="/" className="mx-auto flex my-10 gap-4">
-          <p>já tem uma conta? </p>
-          <span> Entrar</span>
-        </Link>
       </div>
     </main>
   );

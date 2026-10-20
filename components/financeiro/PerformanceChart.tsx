@@ -23,11 +23,11 @@ export default function PerformanceChart({
   onPeriodoChange,
 }: PerformanceChartProps) {
   return (
-    <div className="bg-white rounded-[20px] shadow-sm p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-medium">Gráfico de Performance</h2>
+    <div className="min-w-0 rounded-2xl border border-[#ececf4] bg-white p-4 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:p-6">
+      <div className="mb-4 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:items-center">
+        <h2 className="text-xl font-semibold sm:text-2xl">Gráfico de Performance</h2>
         <select
-          className="pl-2 py-2 border-2 border-gra rounded-[10px] outline-none text-sm"
+          className="w-full py-2 pl-3 text-sm sm:w-auto"
           value={periodo}
           onChange={(e) => onPeriodoChange(e.target.value)}
         >
@@ -36,7 +36,7 @@ export default function PerformanceChart({
         </select>
       </div>
 
-      <div className="h-64">
+      <div className="h-56 min-w-0 sm:h-64">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ left: -20 }}>
             <XAxis dataKey="mes" tick={{ fontSize: 12 }} />
@@ -45,14 +45,14 @@ export default function PerformanceChart({
             <Line
               type="monotone"
               dataKey="real"
-              stroke="#0051FF"
+              stroke="#5141D9"
               strokeWidth={2}
               dot={false}
             />
             <Line
               type="monotone"
               dataKey="previsto"
-              stroke="#22C55E"
+              stroke="#28a887"
               strokeWidth={2}
               strokeDasharray="4 4"
               dot={false}
@@ -61,13 +61,13 @@ export default function PerformanceChart({
         </ResponsiveContainer>
       </div>
 
-      <div className="flex items-center gap-6 mt-2">
+      <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2">
         <div className="flex items-center gap-2">
-          <span className="w-4 h-2 rounded-full bg-[#0051FF]" />
+          <span className="h-2 w-4 rounded-full bg-[#5141d9]" />
           <p className="text-sm text-gray-600">Faturamento real</p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-4 h-2 rounded-full bg-[#22C55E]" />
+          <span className="h-2 w-4 rounded-full bg-[#28a887]" />
           <p className="text-sm text-gray-600">Faturamento Previsto</p>
         </div>
       </div>

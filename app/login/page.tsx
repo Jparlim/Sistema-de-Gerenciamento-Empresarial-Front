@@ -2,9 +2,11 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import logo from "@/public/logoCreatePage.png";
-import lock from "@/public/Lock.png";
+import logo from "@/public/logoCreatePag.png";
+import eyesOn from "@/public/eyesOn.svg";
+import eyesOff from "@/public/eyesOff.svg";
 import Link from "next/link";
+import Image from "next/image";
 import { apiFetch, ApiError } from "@/lib/api";
 import { getIA } from "@/lib/ia";
 
@@ -72,64 +74,80 @@ export default function Login() {
   }
 
   return (
-    <main className="w-full flex justify-center gap-8">
-      <img src={logo.src} width={800} alt="" />
+    <main className="flex min-h-dvh w-full items-center justify-center bg-[radial-gradient(ellipse_at_top_left,#e8f0ff_0%,#f5f2ff_34%,#f7f8fc_72%)] px-4 py-8 sm:px-6">
+      <div className="flex w-full max-w-7xl items-center justify-center gap-10 lg:gap-16">
+        <Image
+          src={logo}
+          width={900}
+          height={900}
+          alt=""
+          className="hidden w-1/2 max-w-150 object-contain lg:block"
+        />
 
-      <div className="w-4/12 flex flex-col gap-6 mt-14">
-        <h1 className="text-center">Entrar</h1>
-        <p className="text-center text-gray-500">
-          Acesse sua conta para continuar
-        </p>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8 mt-10">
-          <div>
-            <h3>Email</h3>
-            <input
-              type="email"
-              name="email"
-              className="w-full pl-2"
-              placeholder="nome@provedor.com"
-              value={form.email}
-              onChange={(e) => updateField("email", e.target.value)}
-            />
+        <div className="mt-0 flex w-full max-w-xl flex-col gap-6 rounded-3xl border border-white bg-white/90 p-7 shadow-[0_24px_80px_rgba(42,38,100,0.12)] backdrop-blur sm:p-10 lg:max-w-136">
+          <div className="mb-2 text-center">
+            <p className="mb-2 text-sm font-bold tracking-[0.2em] text-[#6754d9]">
+              QUANTYUM
+            </p>
+            <h1 className="text-center text-3xl sm:text-4xl">Entrar</h1>
           </div>
+          <p className="text-center text-gray-500">
+            Acesse sua conta para continuar
+          </p>
 
-          <div className="w-full relative">
-            <h3>Senha</h3>
-            <input
-              type={mostrarSenha ? "text" : "password"}
-              name="senha"
-              className="w-full pl-11"
-              value={form.senha}
-              onChange={(e) => updateField("senha", e.target.value)}
-            />
-            <img
-              src={lock.src}
-              width={25}
-              height={25}
-              alt="mostrar senha"
-              className="absolute top-[50px] left-3 cursor-pointer"
-              onClick={() => setMostrarSenha((v) => !v)}
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="mt-2 flex flex-col gap-5">
+            <div>
+              <h3>Email</h3>
+              <input
+                type="email"
+                name="email"
+                className="w-full pl-2"
+                placeholder="nome@provedor.com"
+                value={form.email}
+                onChange={(e) => updateField("email", e.target.value)}
+              />
+            </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-2xs h-14 mx-auto my-8"
+            <div className="w-full relative">
+              <h3>Senha</h3>
+              <input
+                type={mostrarSenha ? "text" : "password"}
+                name="senha"
+                className="w-full pl-11"
+                value={form.senha}
+                onChange={(e) => updateField("senha", e.target.value)}
+              />
+              <Image
+                src={mostrarSenha ? eyesOn : eyesOff}
+                width={25}
+                height={25}
+                alt="mostrar senha"
+                className="absolute top-11 left-3 cursor-pointer"
+                onClick={() => setMostrarSenha((v) => !v)}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-2 h-12 w-full font-semibold"
+            >
+              {loading ? "Entrando..." : "Entrar"}
+            </button>
+
+            {erro && (
+              <p className="text-red-600 font-semibold text-center">{erro}</p>
+            )}
+          </form>
+
+          <Link
+            href="/register"
+            className="mx-auto mt-1 flex flex-wrap justify-center gap-1 text-sm"
           >
-            {loading ? "Entrando..." : "Entrar"}
-          </button>
-
-          {erro && (
-            <p className="text-red-600 font-semibold text-center">{erro}</p>
-          )}
-        </form>
-
-        <Link href="/register" className="mx-auto flex my-10 gap-4">
-          <p>Não tem uma conta? </p>
-          <span> Criar conta</span>
-        </Link>
+            <p className="mb-0 text-gray-500">Não tem uma conta?</p>
+            <span className="font-semibold text-[#5141d9]">Criar conta</span>
+          </Link>
+        </div>
       </div>
     </main>
   );

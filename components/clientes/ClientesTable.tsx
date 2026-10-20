@@ -33,13 +33,13 @@ export default function ClientesTable({
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <div className="bg-white rounded-[20px] shadow-sm p-6">
-      <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
-        <h2 className="text-2xl font-medium">Clientes mais recentes</h2>
+    <div className="min-w-0 rounded-2xl border border-[#ececf4] bg-white p-4 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:p-6">
+      <div className="mb-4 flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:items-center">
+        <h2 className="text-xl font-semibold sm:text-2xl">Clientes mais recentes</h2>
         <input
           type="text"
           placeholder="Buscar cliente..."
-          className="w-64 pl-2"
+          className="w-full pl-3 sm:w-64"
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
         />
@@ -50,7 +50,8 @@ export default function ClientesTable({
           Nenhum cliente encontrado.
         </p>
       ) : (
-        <table className="w-full text-sm">
+        <div className="overflow-x-auto">
+        <table className="w-full min-w-[650px] text-sm">
           <thead>
             <tr className="text-left text-gray-400 border-b border-gray-100">
               <th className="font-medium pb-3 pr-4">Nome</th>
@@ -110,6 +111,7 @@ export default function ClientesTable({
             })}
           </tbody>
         </table>
+        </div>
       )}
     </div>
   );

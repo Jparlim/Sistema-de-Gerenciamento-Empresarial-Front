@@ -61,7 +61,7 @@ export default function StatsGrid({ clientes }: { clientes: Cliente[] }) {
     {
       label: "Negocios fechados",
       value: fechados,
-      barClass: "bg-blu",
+      barClass: "bg-gradient-to-r from-[#2d7cff] via-[#5141d9] to-[#7a1eff]",
       subtitle: "Clientes que fecharam negócio",
     },
     {
@@ -73,13 +73,13 @@ export default function StatsGrid({ clientes }: { clientes: Cliente[] }) {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 xl:grid-cols-3 sm:gap-5">
       {cards.map((card) => (
         <div
           key={card.label}
-          className="bg-white rounded-[20px] shadow-sm p-6"
+          className="rounded-2xl border border-[#ececf4] bg-white p-4 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:p-5"
         >
-          <p className="text-2xl font-medium mb-2">{card.label}</p>
+          <p className="mb-2 text-lg font-semibold sm:text-xl">{card.label}</p>
           <div className="flex items-center gap-3 mb-2">
             <p className="text-4xl font-semibold">
               {card.value.toLocaleString("pt-BR")}
