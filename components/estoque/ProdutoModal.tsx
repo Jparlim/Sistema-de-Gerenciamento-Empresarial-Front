@@ -89,7 +89,7 @@ export default function ProdutoModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl shadow-sm w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto"
+        className="max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-2xl border border-white bg-white p-4 shadow-[0_24px_80px_rgba(25,22,65,0.2)] sm:p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
@@ -130,7 +130,7 @@ export default function ProdutoModal({
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <p className="text-sm font-semibold text-gray-700 mb-1">
                 Valor Unitário
@@ -181,9 +181,11 @@ export default function ProdutoModal({
             <button
               type="button"
               onClick={() => setCriandoFornecedor(true)}
-              className="bg-none! bg-transparent! shadow-none text-blu! text-sm justify-start! px-0 mt-1"
+              className="mt-3 inline-flex min-h-10! w-full justify-center! gap-2 rounded-xl! border border-[#dcd5ff]! bg-[#f5f2ff]! px-4! py-2! text-sm! font-semibold! text-[#5141d9]! shadow-none! hover:bg-[#ece7ff]! sm:w-auto sm:justify-start!"
+              style={{ background: "#f5f2ff", backgroundImage: "none" }}
             >
-              + novo fornecedor
+              <span aria-hidden="true" className="text-lg leading-none">+</span>
+              Novo fornecedor
             </button>
           </div>
 

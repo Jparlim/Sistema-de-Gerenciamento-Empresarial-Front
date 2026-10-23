@@ -29,12 +29,12 @@ export default function ProdutosTable({
   );
 
   return (
-    <div className="bg-white rounded-[20px] shadow-sm p-6">
-      <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
+    <div className="min-w-0 rounded-2xl border border-[#ececf4] bg-white p-4 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:p-6">
+      <div className="mb-4 flex items-center justify-between gap-4">
         <input
           type="text"
           placeholder="Buscar produto..."
-          className="w-64 pl-2"
+          className="w-full pl-3 sm:w-64"
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
         />
@@ -45,7 +45,8 @@ export default function ProdutosTable({
           Nenhum produto encontrado.
         </p>
       ) : (
-        <table className="w-full text-sm">
+        <div className="overflow-x-auto">
+        <table className="w-full min-w-[760px] text-sm">
           <thead>
             <tr className="text-left text-gray-400 border-b border-gray-100">
               <th className="font-medium pb-3 pr-4">Produto</th>
@@ -83,6 +84,7 @@ export default function ProdutosTable({
             ))}
           </tbody>
         </table>
+        </div>
       )}
     </div>
   );

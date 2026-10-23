@@ -38,7 +38,7 @@ export default function DadoModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl shadow-sm w-full max-w-sm p-6"
+        className="w-full max-w-sm rounded-2xl border border-white bg-white p-4 shadow-[0_24px_80px_rgba(25,22,65,0.2)] sm:p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">

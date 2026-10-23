@@ -4,8 +4,8 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { Cliente } from "@/lib/clientes";
 
 const CORES = {
-  perdidas: "#0051FF",
-  fechadas: "#00FFF2",
+  perdidas: "#d77a9c",
+  fechadas: "#28a887",
 };
 
 export default function VendasPerdidasChart({
@@ -24,8 +24,8 @@ export default function VendasPerdidasChart({
   const semDados = perdidas === 0 && fechadas === 0;
 
   return (
-    <div className="bg-white rounded-[20px] shadow-sm p-6">
-      <h2 className="text-2xl font-medium mb-4">Análise de Vendas Perdidas</h2>
+    <div className="min-w-0 rounded-2xl border border-[#ececf4] bg-white p-4 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:p-6">
+      <h2 className="mb-4 text-xl font-semibold sm:text-2xl">Análise de Vendas Perdidas</h2>
 
       {semDados ? (
         <p className="text-sm text-gray-400 py-6">
@@ -53,7 +53,7 @@ export default function VendasPerdidasChart({
         </div>
       )}
 
-      <div className="flex items-center gap-6 mt-2">
+      <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2">
         <div className="flex items-center gap-2">
           <span
             className="w-2.5 h-2.5 rounded-full"

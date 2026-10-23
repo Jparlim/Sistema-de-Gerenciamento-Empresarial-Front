@@ -43,7 +43,7 @@ export default function NovoFornecedorModal({
       }}
     >
       <div
-        className="bg-white rounded-2xl shadow-sm w-full max-w-md p-6 max-h-[90vh] overflow-y-auto"
+        className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-2xl border border-white bg-white p-4 shadow-[0_24px_80px_rgba(25,22,65,0.2)] sm:p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">

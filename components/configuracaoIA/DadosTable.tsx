@@ -16,13 +16,14 @@ export default function DadosTable({
   const entries = Object.entries(dados);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-6 w-full">
+    <div className="w-full min-w-0 rounded-2xl border border-[#ececf4] bg-white p-4 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:p-6">
       {entries.length === 0 ? (
         <p className="text-sm text-gray-400 py-2">
           Nenhum dado cadastrado ainda.
         </p>
       ) : (
-        <table className="w-full text-sm">
+        <div className="overflow-x-auto">
+        <table className="w-full min-w-[420px] text-sm">
           <thead>
             <tr className="text-left text-gray-400 border-b border-gray-100">
               <th className="font-medium pb-3 pr-4">Nome do dado</th>
@@ -59,14 +60,16 @@ export default function DadosTable({
             ))}
           </tbody>
         </table>
+        </div>
       )}
 
       <button
         type="button"
         onClick={onAdd}
-        className="bg-none! bg-transparent! shadow-none text-gray-700! hover:text-blu! px-0! mt-4 justify-start!"
+        className="mt-5 inline-flex min-h-11! w-full items-center justify-center gap-2 rounded-xl! bg-[linear-gradient(110deg,#2d7cff_0%,#5141d9_56%,#7a1eff_100%)] px-4! py-2.5! text-sm! font-semibold! text-white! shadow-[0_8px_20px_rgba(81,65,217,0.16)] transition hover:brightness-105 sm:w-auto"
       >
-        + Adicionar dado
+        <span aria-hidden="true" className="text-lg leading-none">+</span>
+        Adicionar dado
       </button>
     </div>
   );

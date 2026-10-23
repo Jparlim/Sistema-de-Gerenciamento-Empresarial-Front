@@ -91,7 +91,7 @@ export default function Financeiro() {
 
   return (
     <AppShell>
-      <h1 className="text-4xl font-medium mb-8">Resumo Financeiro</h1>
+      <h1 className="mb-6 text-3xl font-semibold sm:mb-8 sm:text-4xl">Resumo Financeiro</h1>
 
       {erro && <p className="text-red-600 font-semibold mb-4">{erro}</p>}
 
@@ -101,7 +101,7 @@ export default function Financeiro() {
         <div className="flex flex-col gap-6">
           <ResumoCards resumo={resumo} />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6 items-start">
+          <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-6">
             <div className="flex flex-col gap-6">
               <PerformanceChart
                 data={performance}

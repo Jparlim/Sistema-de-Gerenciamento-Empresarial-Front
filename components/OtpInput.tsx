@@ -109,7 +109,7 @@ export default function OtpInput({ length = 6 }: OtpInputProps) {
         Código de verificação de {length} dígitos
       </label>
 
-      <div className={`flex gap-2 justify-center ${shake ? "shake" : ""}`}>
+      <div className={`flex justify-center gap-1 min-[390px]:gap-2 ${shake ? "shake" : ""}`}>
         {otp.map((digit, index) => (
           <input
             key={index}
@@ -122,7 +122,7 @@ export default function OtpInput({ length = 6 }: OtpInputProps) {
             onChange={(e) => handleChange(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             onPaste={handlePaste}
-            className="w-14 h-14 mt-10 text-center text-xl font-semibold text-gray-800 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+            className="mt-6 h-11 w-9 rounded-lg border border-gray-200 bg-white text-center text-lg font-semibold text-gray-800 min-[390px]:w-11 sm:mt-8 sm:h-14 sm:w-14 sm:rounded-xl sm:text-xl"
           />
         ))}
       </div>
@@ -134,7 +134,7 @@ export default function OtpInput({ length = 6 }: OtpInputProps) {
       <button
         type="submit"
         disabled={loading}
-        className="w-[50%] h-12 mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all shadow-sm active:scale-95"
+        className="mt-5 h-12 w-full max-w-xs font-semibold sm:mt-7"
       >
         {loading ? "Verificando..." : "Verificar código"}
       </button>

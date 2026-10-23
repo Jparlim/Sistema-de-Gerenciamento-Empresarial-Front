@@ -40,8 +40,8 @@ export default function VisitsTable({
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-6 w-full overflow-x-auto">
-      <table className="w-full text-sm">
+    <div className="w-full min-w-0 overflow-x-auto rounded-2xl border border-[#ececf4] bg-white p-4 shadow-[0_8px_30px_rgba(31,28,78,0.04)] sm:p-6">
+      <table className="w-full min-w-[560px] text-sm">
         <thead>
           <tr className="text-left text-gray-400 border-b border-gray-100">
             <th className="font-medium pb-3 pr-4">Nome</th>

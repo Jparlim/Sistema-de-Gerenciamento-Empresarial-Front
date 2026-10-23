@@ -129,7 +129,7 @@ export default function NewVisitModal({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl shadow-sm w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto"
+        className="max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-2xl border border-white bg-white p-4 shadow-[0_24px_80px_rgba(25,22,65,0.2)] sm:p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
@@ -185,7 +185,7 @@ export default function NewVisitModal({
             />
           </div>
 
-          <div className="flex gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="w-full">
               <p className="text-sm font-semibold text-gray-700 mb-1">Data</p>
               <input
@@ -201,6 +201,7 @@ export default function NewVisitModal({
               </p>
               <input
                 type="time"
+                lang="pt-BR"
                 className="w-full pl-2"
                 value={form.hora}
                 onChange={(e) => updateField("hora", e.target.value)}
