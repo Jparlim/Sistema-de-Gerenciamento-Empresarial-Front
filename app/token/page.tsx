@@ -66,13 +66,17 @@ export default function PageVerificacao() {
         <Image
           src={logoToken}
           width={1000}
+          height={1000}
+          loading="eager"
           alt=""
           className="hidden w-1/2 max-w-150 object-contain lg:block"
         />
-        <div className="flex w-full max-w-[560px] flex-col items-center gap-3 rounded-3xl border border-white bg-white/90 p-5 shadow-[0_24px_80px_rgba(42,38,100,0.12)] backdrop-blur sm:p-9">
+        <div className="flex w-full max-w-140 flex-col items-center gap-3 rounded-3xl border border-white bg-white/90 p-5 shadow-[0_24px_80px_rgba(42,38,100,0.12)] backdrop-blur sm:p-9">
           <Image
             src={postal.src}
             width={100}
+            height={100}
+            loading="eager"
             alt=""
             className="mb-1 rounded-full bg-[#f1eeff] p-3"
           />
@@ -122,13 +126,14 @@ export default function PageVerificacao() {
             </label>
           </div>
 
-          <p className="mt-2 flex flex-wrap items-center justify-center gap-2 text-center text-sm">
-            Não recebeu o código?
+          <div className="mt-2 flex w-full flex-wrap items-center justify-center gap-2 text-center text-sm">
+            <span className="text-gray-600">Não recebeu o código?</span>
             <button
               type="button"
               onClick={handleResend}
               disabled={cooldown > 0 || reenviando}
-              className="cursor-pointer bg-transparent font-semibold text-[#5141d9] shadow-none disabled:cursor-not-allowed disabled:text-gray-400"
+              className="min-h-10 rounded-full! border border-[#dcd5ff]! bg-[#f1eeff]! px-4! py-2! text-sm! font-semibold! text-[#5141d9]! shadow-none! transition-colors hover:bg-[#e9e3ff]! disabled:cursor-not-allowed disabled:border-gray-200! disabled:bg-gray-50! disabled:text-gray-400!"
+              style={{ background: "#f1eeff", backgroundImage: "none" }}
             >
               {cooldown > 0
                 ? `Reenviar código (${cooldown}s)`
@@ -136,7 +141,7 @@ export default function PageVerificacao() {
                   ? "Enviando..."
                   : "Reenviar código"}
             </button>
-          </p>
+          </div>
 
           {mensagem && (
             <p className="text-sm text-gray-500 text-center">{mensagem}</p>

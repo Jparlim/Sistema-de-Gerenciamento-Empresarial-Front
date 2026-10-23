@@ -114,7 +114,7 @@ export default function CreateCount() {
           className="hidden h-auto w-1/2 max-w-150 object-contain lg:block"
         />
 
-        <div className="flex w-full max-w-[620px] flex-col gap-5 rounded-3xl border border-white bg-white/90 p-5 shadow-[0_24px_80px_rgba(42,38,100,0.12)] backdrop-blur sm:p-9">
+        <div className="flex w-full max-w-155 flex-col gap-5 rounded-3xl border border-white bg-white/90 p-5 shadow-[0_24px_80px_rgba(42,38,100,0.12)] backdrop-blur sm:p-9">
           <div className="mb-1 text-center">
             <p className="mb-2 text-sm font-bold tracking-[0.2em] text-[#6754d9]">
               QUANTYUM
