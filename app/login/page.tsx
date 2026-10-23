@@ -128,6 +128,14 @@ export default function Login() {
             </div>
 
             <button
+              type="button"
+              className="-mt-2 min-h-0! self-end rounded-none! bg-transparent! p-0! text-sm! font-semibold! text-[#5141d9]! shadow-none! transition-colors hover:text-[#382ca5]!"
+              style={{ background: "transparent", backgroundImage: "none" }}
+            >
+              Esqueceu a senha?
+            </button>
+
+            <button
               type="submit"
               disabled={loading}
               className="mt-2 h-12 w-full font-semibold"

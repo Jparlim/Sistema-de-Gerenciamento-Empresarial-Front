@@ -35,7 +35,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
           className="fixed inset-0 z-40 rounded-none! p-0! lg:hidden"
           style={{
             minHeight: 0,
-            background: "rgb(15 23 42 / 35%)",
+            background: "transparent",
             backgroundImage: "none",
             boxShadow: "none",
             filter: "none",
