@@ -32,7 +32,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
           type="button"
           aria-label="Fechar menu"
           onClick={() => setOpen(false)}
-          className="fixed inset-0 z-40 rounded-none! p-0! lg:hidden"
+          // Override the global button display so the mobile backdrop cannot intercept desktop clicks.
+          className="fixed inset-0 z-40 rounded-none! p-0! lg:hidden!"
           style={{
             minHeight: 0,
             background: "transparent",
