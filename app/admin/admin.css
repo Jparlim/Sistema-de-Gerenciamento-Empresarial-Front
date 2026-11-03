@@ -1,0 +1,28 @@
+.admin-panel {
+  min-width: 0;
+  border: 1px solid #ececf4;
+  border-radius: 1rem;
+  background: white;
+  padding: 1.5rem;
+  box-shadow: 0 8px 30px rgb(31 28 78 / 4%);
+}
+.admin-field { width: 100%; padding-left: .75rem; padding-right: .75rem; }
+.admin-secondary, .admin-danger, .admin-link {
+  padding: .5rem .875rem;
+  font-size: .875rem;
+  font-weight: 500;
+  box-shadow: none;
+}
+button.admin-secondary { border: 1px solid #e9eaf2; background: #fff; color: #51536a; }
+button.admin-danger { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+button.admin-link { background: #f5f3ff; color: #5141d9; }
+.admin-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.admin-table { width: 100%; font-size: .875rem; text-align: left; border-collapse: collapse; }
+.admin-table th { padding: 0 1rem .875rem 0; color: #73758a; font-weight: 500; white-space: nowrap; border-bottom: 1px solid #e9eaf2; }
+.admin-table td { padding: 1rem 1rem 1rem 0; vertical-align: middle; border-bottom: 1px solid #f3f4f6; }
+.admin-table tbody tr:last-child td { border-bottom: 0; }
+.admin-table th:last-child, .admin-table td:last-child { padding-right: 0; }
+.admin-modal { position: fixed; inset: 0; width: min(40rem, calc(100vw - 2rem)); max-height: calc(100dvh - 3rem); margin: auto; overflow-y: auto; overscroll-behavior: contain; border: 1px solid #e9eaf2; border-radius: 1.5rem; padding: 1.5rem; color: #202338; background: white; box-shadow: 0 24px 80px rgb(42 38 100 / 18%); }
+.admin-modal::backdrop { background: rgb(32 35 56 / 35%); backdrop-filter: blur(3px); }
+body:has(.admin-modal[open]) { overflow: hidden; }
+@media (max-width: 639px) { .admin-panel, .admin-modal { padding: 1rem; } }

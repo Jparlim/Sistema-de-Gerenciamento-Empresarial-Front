@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "@/public/logoCreatePag.png";
 
-export default function AuthCard({ title, description, children }: { title: string; description: string; children: ReactNode }) {
+export default function AuthCard({ title, description, children, backHref = "/login" }: { title: string; description: string; children: ReactNode; backHref?: string }) {
   return (
     <main className="flex min-h-dvh w-full items-center justify-center bg-[radial-gradient(ellipse_at_top_left,#e8f0ff_0%,#f5f2ff_34%,#f7f8fc_72%)] px-4 py-8 sm:px-6">
       <div className="flex w-full max-w-7xl items-center justify-center gap-10 lg:gap-16">
@@ -15,7 +15,7 @@ export default function AuthCard({ title, description, children }: { title: stri
           </div>
           <p className="mb-0 text-center text-gray-500">{description}</p>
           {children}
-          <Link href="/login" className="mx-auto text-sm font-semibold text-[#5141d9] hover:text-[#382ca5]">Voltar para entrar</Link>
+          <Link href={backHref} className="mx-auto text-sm font-semibold text-[#5141d9] hover:text-[#382ca5]">Voltar para entrar</Link>
         </div>
       </div>
     </main>

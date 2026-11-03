@@ -53,7 +53,7 @@ export default function LoginAdm() {
         method: "POST",
         body: JSON.stringify(form),
       });
-      router.push("/home");
+      router.push("/admin");
     } catch (err) {
       setErro(
         err instanceof ApiError
