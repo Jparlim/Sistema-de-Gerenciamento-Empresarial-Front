@@ -5,7 +5,7 @@ export type Produto = {
   nome: string;
   categoria: string;
   quantidade: number;
-  valor_unitario: number;
+  valor_unitario: string;
   fornecedorId: number;
   estoqueId: number;
 };

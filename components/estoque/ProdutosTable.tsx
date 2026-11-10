@@ -41,49 +41,49 @@ export default function ProdutosTable({
       </div>
 
       {filtrados.length === 0 ? (
-        <p className="text-sm text-gray-400 py-2">
-          Nenhum produto encontrado.
-        </p>
+        <p className="text-sm text-gray-400 py-2">Nenhum produto encontrado.</p>
       ) : (
         <div className="overflow-x-auto">
-        <table className="w-full min-w-[760px] text-sm">
-          <thead>
-            <tr className="text-left text-gray-400 border-b border-gray-100">
-              <th className="font-medium pb-3 pr-4">Produto</th>
-              <th className="font-medium pb-3 pr-4">Categoria</th>
-              <th className="font-medium pb-3 pr-4">Valor Unitário</th>
-              <th className="font-medium pb-3 pr-4">Quantidade</th>
-              <th className="font-medium pb-3 pr-4">Fornecedor</th>
-              <th className="font-medium pb-3 text-right">Ação</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtrados.map((produto) => (
-              <tr
-                key={produto.id}
-                className="border-b border-gray-50 last:border-0"
-              >
-                <td className="py-3 pr-4 text-gray-800">{produto.nome}</td>
-                <td className="py-3 pr-4 text-gray-600">{produto.categoria}</td>
-                <td className="py-3 pr-4 text-gray-600">
-                  {formatBRL(produto.valor_unitario)}
-                </td>
-                <td className="py-3 pr-4 text-gray-600">
-                  {produto.quantidade}
-                </td>
-                <td className="py-3 pr-4 text-gray-600">
-                  {fornecedorNome(produto.fornecedorId)}
-                </td>
-                <td className="py-3 text-right">
-                  <RowActionsMenu
-                    onEdit={() => onEdit(produto)}
-                    onDelete={() => onDelete(produto)}
-                  />
-                </td>
+          <table className="w-full min-w-[760px] text-sm">
+            <thead>
+              <tr className="text-left text-gray-400 border-b border-gray-100">
+                <th className="font-medium pb-3 pr-4">Produto</th>
+                <th className="font-medium pb-3 pr-4">Categoria</th>
+                <th className="font-medium pb-3 pr-4">Valor Unitário</th>
+                <th className="font-medium pb-3 pr-4">Quantidade</th>
+                <th className="font-medium pb-3 pr-4">Fornecedor</th>
+                <th className="font-medium pb-3 text-right">Ação</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtrados.map((produto) => (
+                <tr
+                  key={produto.id}
+                  className="border-b border-gray-50 last:border-0"
+                >
+                  <td className="py-3 pr-4 text-gray-800">{produto.nome}</td>
+                  <td className="py-3 pr-4 text-gray-600">
+                    {produto.categoria}
+                  </td>
+                  <td className="py-3 pr-4 text-gray-600">
+                    {formatBRL(Number(produto.valor_unitario))}
+                  </td>
+                  <td className="py-3 pr-4 text-gray-600">
+                    {produto.quantidade}
+                  </td>
+                  <td className="py-3 pr-4 text-gray-600">
+                    {fornecedorNome(produto.fornecedorId)}
+                  </td>
+                  <td className="py-3 text-right">
+                    <RowActionsMenu
+                      onEdit={() => onEdit(produto)}
+                      onDelete={() => onDelete(produto)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

@@ -34,8 +34,8 @@ export default function ProdutoModal({
   const [nome, setNome] = useState(produto?.nome ?? "");
   const [categoria, setCategoria] = useState(produto?.categoria ?? "");
   const [quantidade, setQuantidade] = useState(produto?.quantidade ?? 0);
-  const [valorUnitario, setValorUnitario] = useState(
-    produto?.valor_unitario ?? 0,
+  const [valorUnitario, setValorUnitario] = useState<string>(
+    produto?.valor_unitario ?? "",
   );
   const [fornecedorId, setFornecedorId] = useState<number | "">(
     produto?.fornecedorId ?? fornecedores[0]?.id ?? "",
@@ -56,7 +56,7 @@ export default function ProdutoModal({
       nome: nome.trim(),
       categoria: categoria.trim(),
       quantidade,
-      valor_unitario: valorUnitario,
+      valor_unitario: Number(valorUnitario.replace(/\D/g, "")) / 100,
       fornecedorId: Number(fornecedorId),
     });
   }
@@ -81,6 +81,17 @@ export default function ProdutoModal({
     } finally {
       setSavingFornecedor(false);
     }
+  }
+
+  function formatarMoeda(valor: string) {
+    const numeros = valor.replace(/\D/g, "");
+
+    const valorNumerico = Number(numeros) / 100;
+
+    return valorNumerico.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
   }
 
   return (
@@ -136,12 +147,20 @@ export default function ProdutoModal({
                 Valor Unitário
               </p>
               <input
-                type="number"
+                type="text"
                 min={0}
                 step="0.01"
+                inputMode="numeric"
                 className="w-full pl-2"
                 value={valorUnitario}
-                onChange={(e) => setValorUnitario(Number(e.target.value))}
+                onFocus={(e) => {
+                  if (Number(e.target.value) === 0) {
+                    e.target.select();
+                  }
+                }}
+                onChange={(e) =>
+                  setValorUnitario(formatarMoeda(e.target.value))
+                }
               />
             </div>
 
@@ -153,8 +172,13 @@ export default function ProdutoModal({
                 type="number"
                 min={0}
                 step="1"
-                className="w-full pl-2"
+                className="w-full pl-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 value={quantidade}
+                onFocus={(e) => {
+                  if (Number(e.target.value) === 0) {
+                    e.target.select();
+                  }
+                }}
                 onChange={(e) => setQuantidade(Number(e.target.value))}
               />
             </div>
@@ -184,7 +208,9 @@ export default function ProdutoModal({
               className="mt-3 inline-flex min-h-10! w-full justify-center! gap-2 rounded-xl! border border-[#dcd5ff]! bg-[#f5f2ff]! px-4! py-2! text-sm! font-semibold! text-[#5141d9]! shadow-none! hover:bg-[#ece7ff]! sm:w-auto sm:justify-start!"
               style={{ background: "#f5f2ff", backgroundImage: "none" }}
             >
-              <span aria-hidden="true" className="text-lg leading-none">+</span>
+              <span aria-hidden="true" className="text-lg leading-none">
+                +
+              </span>
               Novo fornecedor
             </button>
           </div>

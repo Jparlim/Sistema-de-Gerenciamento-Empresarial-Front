@@ -9,28 +9,73 @@ type NovoFornecedorModalProps = {
   saving: boolean;
 };
 
+type FormState = {
+  telefone: string;
+  CNPJ: string;
+};
+
+function maskCNPJ(value: string) {
+  return value
+    .replace(/\D/g, "")
+    .slice(0, 14)
+    .replace(/(\d{2})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1/$2")
+    .replace(/(\d{4})(\d{1,2})$/, "$1-$2");
+}
+
+function maskTelefone(value: string) {
+  return value
+    .replace(/\D/g, "")
+    .slice(0, 11)
+    .replace(/(\d{2})(\d)/, "($1) $2")
+    .replace(/(\d{5})(\d{1,4})$/, "$1-$2");
+}
+
 export default function NovoFornecedorModal({
   onClose,
   onCreate,
   saving,
 }: NovoFornecedorModalProps) {
   const [nome, setNome] = useState("");
-  const [contato, setContato] = useState("");
-  const [cnpj, setCnpj] = useState("");
   const [erro, setErro] = useState<string | null>(null);
+  const [form, setForm] = useState<FormState>({
+    telefone: "",
+    CNPJ: "",
+  });
+
+  function updateField(field: keyof FormState, value: string) {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  }
+
+  function validate(): string | null {
+    if (form.telefone.replace(/\D/g, "").length < 10)
+      return "Informe um telefone válido!";
+    if (form.CNPJ.replace(/\D/g, "").length !== 14)
+      return "informe um CNPJ válido!;";
+    return null;
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    if (!nome.trim() || !contato.trim() || !cnpj.trim()) {
+    const validationError = validate();
+    if (validationError) {
+      setErro(validationError);
+      return;
+    }
+
+    if (!nome.trim() || !form.telefone.trim() || !form.CNPJ.trim()) {
       setErro("Nome, contato e CNPJ são obrigatórios!");
       return;
     }
 
+    setErro(null);
+
     await onCreate({
       nome: nome.trim(),
-      contato: contato.trim(),
-      CNPJ: cnpj.trim(),
+      contato: form.telefone.trim(),
+      CNPJ: form.CNPJ.trim(),
     });
   }
 
@@ -75,8 +120,11 @@ export default function NovoFornecedorModal({
             <input
               type="text"
               className="w-full pl-2"
-              value={contato}
-              onChange={(e) => setContato(e.target.value)}
+              placeholder="(XX) XXXXX-XXXX"
+              value={form.telefone}
+              onChange={(e) =>
+                updateField("telefone", maskTelefone(e.target.value))
+              }
             />
           </div>
 
@@ -85,8 +133,9 @@ export default function NovoFornecedorModal({
             <input
               type="text"
               className="w-full pl-2"
-              value={cnpj}
-              onChange={(e) => setCnpj(e.target.value)}
+              placeholder="XX.XXX.XXX/XXXX-XX"
+              value={form.CNPJ}
+              onChange={(e) => updateField("CNPJ", maskCNPJ(e.target.value))}
             />
           </div>
 
